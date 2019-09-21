@@ -1,2 +1,2 @@
-# sSchedule
+# dis-schedule
 simple distributed timing scheduling
