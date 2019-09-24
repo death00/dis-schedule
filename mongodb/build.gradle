@@ -1,0 +1,31 @@
+apply plugin: "application"
+
+mainClassName = "top.death00.StartServer"
+
+configurations {
+    all {
+        compile.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+    compile.exclude module: 'spring-boot-starter-tomcat'
+}
+
+dependencies {
+    compile "com.google.code.gson:gson:${gsonVersion}"
+    compile "org.apache.httpcomponents:httpclient:${httpClientVersion}"
+    compile "org.apache.httpcomponents:httpasyncclient:${httpAsyncClientVersion}"
+    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    compile "joda-time:joda-time:${jodaTimeVersion}"
+    compile "org.apache.commons:commons-lang3:${commonsLang3Version}"
+    compile "org.projectlombok:lombok:${lombokVersion}"
+    compile "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}"
+    compile "redis.clients:jedis:${jedisVersion}"
+
+    compile "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}"
+
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+    compile "log4j:log4j:${log4jVersion}"
+}
