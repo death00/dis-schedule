@@ -1,4 +1,4 @@
-package top.death00;
+package top.death00.dis.schedule;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.springframework.boot.SpringApplication;
@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.data.mongo.MongoReactiveDataAutoCo
 import org.springframework.context.annotation.PropertySource;
 
 /**
- * @author gyj
- * @date 2019/5/25
+ * @author death00
+ * @date 2019/9/24
  */
 @SpringBootApplication(
         exclude = {
@@ -17,13 +17,13 @@ import org.springframework.context.annotation.PropertySource;
                 MongoReactiveDataAutoConfiguration.class
         }
 )
-@PropertySource(value = "file:${WS_SERV_BASE}/conf/schedule-service.conf")
+@PropertySource(value = "file:${EXAMPLE_BASE}/example.conf")
 public class StartServer {
 
     public static void main(String[] args) {
         // 加载日志相关配置
-        String basePath = System.getenv("WS_SERV_BASE");
-        PropertyConfigurator.configure(basePath + "/conf/schedule-service-log.properties");
+        String basePath = System.getenv("EXAMPLE_BASE");
+        PropertyConfigurator.configure(basePath + "/log.properties");
 
         SpringApplication.run(StartServer.class, args);
     }

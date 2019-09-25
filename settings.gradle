@@ -1,5 +1,4 @@
 rootProject.name = 'dis-schedule'
-rootProject.name = 'dis-schedule'
 include 'example'
-include 'mongodb'
+include 'common'
 

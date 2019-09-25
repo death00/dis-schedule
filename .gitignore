@@ -2,5 +2,8 @@
 .gradle/
 *.iml
 
-mongodb/build/
-mongodb/out/
+example/build/
+example/out/
+
+common/build/
+common/out/

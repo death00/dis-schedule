@@ -1,4 +1,4 @@
-group 'top.death00'
+group 'top.death00.dis-schedule'
 version '1.0-SNAPSHOT'
 
 task wrapper(type: Wrapper) {
