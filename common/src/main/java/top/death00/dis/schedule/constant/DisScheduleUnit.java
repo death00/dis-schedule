@@ -13,19 +13,19 @@ import lombok.Getter;
 @Getter
 public enum DisScheduleUnit {
 
-    // 毫秒
-    MILLISECONDS(TimeUnit.MILLISECONDS),
+	// 毫秒
+	MILLISECONDS(TimeUnit.MILLISECONDS),
 
-    // 秒
-    SECONDS(TimeUnit.SECONDS),
+	// 秒
+	SECONDS(TimeUnit.SECONDS),
 
-    // 分钟
-    MINUTES(TimeUnit.MINUTES);
+	// 分钟
+	MINUTES(TimeUnit.MINUTES);
 
-    private TimeUnit unit;
+	private TimeUnit unit;
 
-    private DisScheduleUnit(TimeUnit unit) {
-        Preconditions.checkNotNull(unit);
-        this.unit = unit;
-    }
+	private DisScheduleUnit(TimeUnit unit) {
+		Preconditions.checkNotNull(unit);
+		this.unit = unit;
+	}
 }

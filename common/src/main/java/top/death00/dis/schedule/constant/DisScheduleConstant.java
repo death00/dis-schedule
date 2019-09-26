@@ -6,5 +6,5 @@ package top.death00.dis.schedule.constant;
  */
 public class DisScheduleConstant {
 
-    public static final String SERVER_NAME = "serverName";
+	public static final String SERVER_NAME = "serverName";
 }

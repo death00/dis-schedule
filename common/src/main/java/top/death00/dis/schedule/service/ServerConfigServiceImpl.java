@@ -15,53 +15,53 @@ import top.death00.dis.schedule.domain.ServerConfig;
  */
 public class ServerConfigServiceImpl implements IServerConfigService {
 
-    private final MongoTemplate mongoTemplate;
+	private final MongoTemplate mongoTemplate;
 
-    public ServerConfigServiceImpl(MongoTemplate mongoTemplate) {
-        Preconditions.checkNotNull(mongoTemplate);
-        this.mongoTemplate = mongoTemplate;
-    }
+	public ServerConfigServiceImpl(MongoTemplate mongoTemplate) {
+		Preconditions.checkNotNull(mongoTemplate);
+		this.mongoTemplate = mongoTemplate;
+	}
 
-    /**
-     * key为name
-     */
-    private volatile ImmutableMap<String, ServerConfig> map;
+	/**
+	 * key为name
+	 */
+	private volatile ImmutableMap<String, ServerConfig> map;
 
-    @Override
-    public void reload() {
-        // 查出所有配置
-        List<ServerConfig> list = mongoTemplate.findAll(ServerConfig.class);
+	@Override
+	public void reload() {
+		// 查出所有配置
+		List<ServerConfig> list = mongoTemplate.findAll(ServerConfig.class);
 
-        Map<String, ServerConfig> map = Maps.newHashMapWithExpectedSize(list.size());
-        for (ServerConfig config : list) {
-            if (config == null) {
-                continue;
-            }
+		Map<String, ServerConfig> map = Maps.newHashMapWithExpectedSize(list.size());
+		for (ServerConfig config : list) {
+			if (config == null) {
+				continue;
+			}
 
-            String name = config.getName();
-            if (Strings.isNullOrEmpty(name)) {
-                continue;
-            }
+			String name = config.getName();
+			if (Strings.isNullOrEmpty(name)) {
+				continue;
+			}
 
-            // 如果服务不存活，则不需要考虑
-            if (!config.isAlive()) {
-                continue;
-            }
+			// 如果服务不存活，则不需要考虑
+			if (!config.isAlive()) {
+				continue;
+			}
 
-            map.put(name, config);
-        }
+			map.put(name, config);
+		}
 
-        this.map = ImmutableMap.copyOf(map);
-    }
+		this.map = ImmutableMap.copyOf(map);
+	}
 
-    @Override
-    public boolean containsServerName(String serverName) {
-        Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
-        return this.map.containsKey(serverName);
-    }
+	@Override
+	public boolean containsServerName(String serverName) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
+		return this.map.containsKey(serverName);
+	}
 
-    @Override
-    public Map<String, ServerConfig> getAll() {
-        return this.map;
-    }
+	@Override
+	public Map<String, ServerConfig> getAll() {
+		return this.map;
+	}
 }

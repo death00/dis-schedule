@@ -9,14 +9,14 @@ import java.util.Date;
  */
 public interface IDisScheduleRecordService {
 
-    /**
-     * 插入数据
-     */
-    UpdateResult insert(
-            String name,
-            Date taskDate,
-            String dateStr,
-            String serverName,
-            Date curDate
-    );
+	/**
+	 * 插入数据
+	 */
+	UpdateResult insert(
+		String name,
+		Date taskDate,
+		String dateStr,
+		String serverName,
+		Date curDate
+	);
 }

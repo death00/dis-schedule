@@ -12,19 +12,19 @@ import org.springframework.context.annotation.PropertySource;
  * @date 2019/9/24
  */
 @SpringBootApplication(
-        exclude = {
-                MongoDataAutoConfiguration.class,
-                MongoReactiveDataAutoConfiguration.class
-        }
+	exclude = {
+		MongoDataAutoConfiguration.class,
+		MongoReactiveDataAutoConfiguration.class
+	}
 )
 @PropertySource(value = "file:${EXAMPLE_BASE}/example.conf")
 public class StartServer {
 
-    public static void main(String[] args) {
-        // 加载日志相关配置
-        String basePath = System.getenv("EXAMPLE_BASE");
-        PropertyConfigurator.configure(basePath + "/log.properties");
+	public static void main(String[] args) {
+		// 加载日志相关配置
+		String basePath = System.getenv("EXAMPLE_BASE");
+		PropertyConfigurator.configure(basePath + "/log.properties");
 
-        SpringApplication.run(StartServer.class, args);
-    }
+		SpringApplication.run(StartServer.class, args);
+	}
 }

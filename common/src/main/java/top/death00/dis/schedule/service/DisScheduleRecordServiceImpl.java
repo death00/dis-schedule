@@ -16,41 +16,41 @@ import top.death00.dis.schedule.domain.DisScheduleRecord;
  */
 public class DisScheduleRecordServiceImpl implements IDisScheduleRecordService {
 
-    private final MongoTemplate mongoTemplate;
+	private final MongoTemplate mongoTemplate;
 
-    public DisScheduleRecordServiceImpl(MongoTemplate mongoTemplate) {
-        Preconditions.checkNotNull(mongoTemplate);
-        this.mongoTemplate = mongoTemplate;
-    }
+	public DisScheduleRecordServiceImpl(MongoTemplate mongoTemplate) {
+		Preconditions.checkNotNull(mongoTemplate);
+		this.mongoTemplate = mongoTemplate;
+	}
 
-    @Override
-    public UpdateResult insert(
-            String name,
-            Date taskDate,
-            String dateStr,
-            String serverName,
-            Date curDate) {
-        Preconditions.checkArgument(!Strings.isNullOrEmpty(name));
-        Preconditions.checkNotNull(taskDate);
-        Preconditions.checkArgument(!Strings.isNullOrEmpty(dateStr));
-        Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
-        Preconditions.checkNotNull(curDate);
+	@Override
+	public UpdateResult insert(
+		String name,
+		Date taskDate,
+		String dateStr,
+		String serverName,
+		Date curDate) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(name));
+		Preconditions.checkNotNull(taskDate);
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(dateStr));
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
+		Preconditions.checkNotNull(curDate);
 
-        Query query = new Query(
-                Criteria.where(DisScheduleRecord.DATE)
-                        .is(taskDate)
-                        .and(DisScheduleRecord.NAME)
-                        .is(name)
-        );
+		Query query = new Query(
+			Criteria.where(DisScheduleRecord.DATE)
+				.is(taskDate)
+				.and(DisScheduleRecord.NAME)
+				.is(name)
+		);
 
-        Update update = new Update();
-        update.setOnInsert(DisScheduleRecord.NAME, name);
-        update.setOnInsert(DisScheduleRecord.DATE, taskDate);
-        update.setOnInsert(DisScheduleRecord.DATE_STR, dateStr);
-        update.setOnInsert(DisScheduleRecord.SERVER_NAME, serverName);
-        update.setOnInsert(DisScheduleRecord.CREATE_TIMESTAMP, curDate);
-        update.setOnInsert(DisScheduleRecord.UPDATE_TIMESTAMP, curDate);
+		Update update = new Update();
+		update.setOnInsert(DisScheduleRecord.NAME, name);
+		update.setOnInsert(DisScheduleRecord.DATE, taskDate);
+		update.setOnInsert(DisScheduleRecord.DATE_STR, dateStr);
+		update.setOnInsert(DisScheduleRecord.SERVER_NAME, serverName);
+		update.setOnInsert(DisScheduleRecord.CREATE_TIMESTAMP, curDate);
+		update.setOnInsert(DisScheduleRecord.UPDATE_TIMESTAMP, curDate);
 
-        return mongoTemplate.upsert(query, update, DisScheduleRecord.class);
-    }
+		return mongoTemplate.upsert(query, update, DisScheduleRecord.class);
+	}
 }

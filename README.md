@@ -22,6 +22,8 @@ serverName=schedule1
 
 ## 分布式锁
 
+### mongodb
+
 ```
 数据库的分布式锁是依赖于唯一索引，表是`disScheduleRecord`，索引是`date`(任务执行所属的时间)和`name`(服务的serverName)。
 当多个服务在向数据库插入数据时，只有一个服务是成功的，和它同时执行插入的服务将抛出异常`DuplicateKeyException`，
@@ -34,4 +36,10 @@ serverName=schedule1
 
 2. 如果query条件没有匹配的数据，则执行`setOnInsert`操作
 
-这样的话，当有多个语句同时执行的话，可能存在同时有几条语句的`query`条件都满足，因此都会执行`setOnInsert`，这就需要`唯一索引`来保证了。
+这样的话，当有多个语句同时执行的话，可能存在同时有几条语句的`query`条件都满足，因此都会执行`setOnInsert`，这就需要`唯一索引`来保证了。-
+
+### redis
+
+1. 项目启动时，向key为`disScheduleServerName`的set添加当前启动的服务的`serverName`。
+2. 判断该项目是否可以启动采用`sismember`。
+3. 争抢分布式锁采用命令`setNx`。

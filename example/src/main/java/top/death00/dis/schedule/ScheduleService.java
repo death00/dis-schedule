@@ -14,11 +14,11 @@ import top.death00.dis.schedule.constant.DisScheduleUnit;
 @Service
 public class ScheduleService {
 
-    private final Logger logger = LoggerFactory.getLogger(ScheduleService.class);
+	private final Logger logger = LoggerFactory.getLogger(ScheduleService.class);
 
-    @DisSchedule(name = "testSchedule", duration = 1, unit = DisScheduleUnit.MINUTES)
-    @Scheduled(cron = "0 0/1 * * * ?")
-    public void testSchedule() {
-        logger.info("输出");
-    }
+	@DisSchedule(name = "testSchedule", duration = 1, unit = DisScheduleUnit.MINUTES)
+	@Scheduled(cron = "0 0/1 * * * ?")
+	public void testSchedule() {
+		logger.info("输出");
+	}
 }

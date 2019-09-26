@@ -16,20 +16,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 public class ServerConfig {
 
-    @Id
-    private ObjectId id;
+	@Id
+	private ObjectId id;
 
-    /**
-     * 服务的名称
-     */
-    private String name;
+	/**
+	 * 服务的名称
+	 */
+	private String name;
 
-    /**
-     * 是否存活
-     */
-    private boolean alive;
+	/**
+	 * 是否存活
+	 */
+	private boolean alive;
 
-    private Date createTimestamp;
+	private Date createTimestamp;
 
-    private Date updateTimestamp;
+	private Date updateTimestamp;
 }

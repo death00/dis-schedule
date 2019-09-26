@@ -9,18 +9,18 @@ import top.death00.dis.schedule.domain.ServerConfig;
  */
 public interface IServerConfigService {
 
-    /**
-     * 刷新内存数据
-     */
-    void reload();
+	/**
+	 * 刷新内存数据
+	 */
+	void reload();
 
-    /**
-     * serverNames是否包含该serverName
-     */
-    boolean containsServerName(String serverName);
+	/**
+	 * serverNames是否包含该serverName
+	 */
+	boolean containsServerName(String serverName);
 
-    /**
-     * 获取所有
-     */
-    Map<String, ServerConfig> getAll();
+	/**
+	 * 获取所有
+	 */
+	Map<String, ServerConfig> getAll();
 }

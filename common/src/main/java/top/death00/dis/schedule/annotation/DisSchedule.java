@@ -16,18 +16,18 @@ import top.death00.dis.schedule.constant.DisScheduleUnit;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DisSchedule {
 
-    /**
-     * 定时调度任务的名称(默认是方法名)
-     */
-    String name() default "";
+	/**
+	 * 定时调度任务的名称(默认是方法名)
+	 */
+	String name() default "";
 
-    /**
-     * 任务的间隔时间
-     */
-    int duration();
+	/**
+	 * 任务的间隔时间
+	 */
+	int duration();
 
-    /**
-     * duration的时间单位(默认：分钟)
-     */
-    DisScheduleUnit unit() default DisScheduleUnit.MINUTES;
+	/**
+	 * duration的时间单位(默认：分钟)
+	 */
+	DisScheduleUnit unit() default DisScheduleUnit.MINUTES;
 }
