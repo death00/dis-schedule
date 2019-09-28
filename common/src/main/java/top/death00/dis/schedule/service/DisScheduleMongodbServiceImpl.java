@@ -75,4 +75,10 @@ public class DisScheduleMongodbServiceImpl implements IDisScheduleService {
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
 		serverConfigService.upsert(serverName, true, TimeUtil.getCurDate());
 	}
+
+	@Override
+	public void removeServerName(String serverName) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
+		serverConfigService.upsert(serverName, false, TimeUtil.getCurDate());
+	}
 }

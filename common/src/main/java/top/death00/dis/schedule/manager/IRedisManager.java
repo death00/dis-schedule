@@ -6,6 +6,8 @@ package top.death00.dis.schedule.manager;
  */
 public interface IRedisManager {
 
+	//region set
+
 	/**
 	 * 向set中添加元素
 	 */
@@ -17,7 +19,18 @@ public interface IRedisManager {
 	boolean sismember(String key, String value);
 
 	/**
+	 * 移除set中的元素
+	 */
+	void srem(String key, String value);
+
+	//region
+
+	//region string
+
+	/**
 	 * 设置字符串的值（如果不存在的话）
 	 */
 	boolean setNx(String key, String value);
+
+	//endregion
 }

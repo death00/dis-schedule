@@ -29,4 +29,9 @@ public interface IDisScheduleService {
 	 * 添加当前的serverName
 	 */
 	void addServerName(String serverName);
+
+	/**
+	 * 移除当前的serverName
+	 */
+	void removeServerName(String serverName);
 }

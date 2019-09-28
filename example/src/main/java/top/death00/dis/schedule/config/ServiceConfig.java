@@ -12,7 +12,6 @@ import top.death00.dis.schedule.manager.IRedisManager;
 import top.death00.dis.schedule.manager.RedisManagerImpl;
 import top.death00.dis.schedule.service.DisScheduleMongodbServiceImpl;
 import top.death00.dis.schedule.service.DisScheduleRecordServiceImpl;
-import top.death00.dis.schedule.service.DisScheduleRedisServiceImpl;
 import top.death00.dis.schedule.service.IDisScheduleRecordService;
 import top.death00.dis.schedule.service.IDisScheduleService;
 import top.death00.dis.schedule.service.IServerConfigService;

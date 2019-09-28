@@ -72,4 +72,10 @@ public class DisScheduleRedisServiceImpl implements IDisScheduleService {
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
 		redisManager.sadd(RedisKey.DIS_SCHEDULE_SERVER_NAME, serverName);
 	}
+
+	@Override
+	public void removeServerName(String serverName) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
+		redisManager.srem(RedisKey.DIS_SCHEDULE_SERVER_NAME, serverName);
+	}
 }

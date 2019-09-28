@@ -41,6 +41,16 @@ public class RedisManagerImpl implements IRedisManager {
 	}
 
 	@Override
+	public void srem(String key, String value) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(key));
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(value));
+
+		try (Jedis jedis = jedisPool.getResource()) {
+			jedis.srem(key, value);
+		}
+	}
+
+	@Override
 	public boolean setNx(String key, String value) {
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(key));
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(value));

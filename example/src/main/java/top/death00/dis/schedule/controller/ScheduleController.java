@@ -54,7 +54,6 @@ public class ScheduleController {
 	@PostConstruct
 	public void init() {
 		disScheduleService.addServerName(serverName);
-		disScheduleService.reload();
 	}
 
 	/**
@@ -67,10 +66,25 @@ public class ScheduleController {
 		return ResponseUtil.success(null, null);
 	}
 
-	@RequestMapping("/addServerName")
+	/**
+	 * 使当前服务生效
+	 */
+	@RequestMapping("/add/serverName")
 	@ResponseBody
 	public Map<String, Object> addServerName() {
 		disScheduleService.addServerName(serverName);
+		disScheduleService.reload();
+		return ResponseUtil.success(null, null);
+	}
+
+	/**
+	 * 使当前服务失效
+	 */
+	@RequestMapping("/remove/serverName")
+	@ResponseBody
+	public Map<String, Object> removeServerName() {
+		disScheduleService.removeServerName(serverName);
+		disScheduleService.reload();
 		return ResponseUtil.success(null, null);
 	}
 
