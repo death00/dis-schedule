@@ -5,6 +5,14 @@
 
 ## 使用
 
+### 配置阶段
+
+#### Bean的注入
+
+参考`top.death00.dis.schedule.config`下的`ServiceConfig`，mongodb和redis的实现方式选择一种。
+
+#### 使用注解
+
 在正常的定时任务上使用注解`@DisSchedule`，定义任务的名称、间隔时间、间隔时间单位
 
 ```java
@@ -15,20 +23,30 @@
     }
 ```
 
-在config文件中配置好当前服务的serverName，要求不能重名。
+#### 配置serverName
+
+参考`resources`中任意一个目录下的`example.conf`，在文件中配置好当前服务的serverName，要求不能重名。
 ```
 serverName=schedule1
 ```
+
+### 启动阶段
+
+#### /schedule/add/serverName
+
+使当前server生效，可以执行定时调度任务
+
+#### /schedule/remove/serverName
+
+使当前server失效，无法执行定时调度任务
 
 ## 分布式锁
 
 ### mongodb
 
-```
-数据库的分布式锁是依赖于唯一索引，表是`disScheduleRecord`，索引是`date`(任务执行所属的时间)和`name`(服务的serverName)。
-当多个服务在向数据库插入数据时，只有一个服务是成功的，和它同时执行插入的服务将抛出异常`DuplicateKeyException`，
-在它之后慢一点执行的将直接查询就失败。
-```
+>数据库的分布式锁是依赖于唯一索引，表是`disScheduleRecord`，索引是`date`(任务执行所属的时间)和`name`(服务的serverName)。
+>
+>当多个服务在向数据库插入数据时，只有一个服务是成功的，和它同时执行插入的服务将抛出异常`DuplicateKeyException`，在它之后慢一点执行的将直接查询就失败。
 
 因为现在数据库用的是`mongodb`，采用的语句是`update({query}, {$setOnInsert : {}})`，`mongodb`在执行的时候是分为两步:
 
@@ -40,6 +58,6 @@ serverName=schedule1
 
 ### redis
 
-1. 项目启动时，向key为`disScheduleServerName`的set添加当前启动的服务的`serverName`。
-2. 判断该项目是否可以启动采用`sismember`。
-3. 争抢分布式锁采用命令`setNx`。
+1. key为`disScheduleServerName`的set，存储线上有效的serverName。
+2. 通过`sismeber`命令确定`disScheduleServerName`是否含有当前server，从而决定是否执行。
+3. 通过`setNx`争抢分布式锁，`value`为服务名，设置成功的服务执行。
