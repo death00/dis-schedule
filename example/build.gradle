@@ -3,6 +3,7 @@ apply plugin: "application"
 mainClassName = "top.death00.dis.schedule.StartServer"
 
 configurations {
+    compile.exclude module: 'spring-boot-starter-tomcat'
     all {
         compile.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
     }
@@ -11,10 +12,10 @@ configurations {
 dependencies {
     compile project(":common")
 
+    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}"
+
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
     compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
     compile "log4j:log4j:${log4jVersion}"
-
-    compile "org.apache.httpcomponents:httpclient:${httpClientVersion}"
-    compile "org.apache.httpcomponents:httpasyncclient:${httpAsyncClientVersion}"
 }

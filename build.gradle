@@ -18,12 +18,8 @@ subprojects {
     }
 
     ext {
-        apacheCommonsVersion = "1.8.3"
         commonsLang3Version = "3.7"
         guavaVersion = "24.1-jre"
-        gsonVersion = "2.8.2"
-        httpClientVersion = "4.5.5"
-        httpAsyncClientVersion = "4.1.3"
         jedisVersion = "2.9.0"
         jodaTimeVersion = "2.10"
         springVersion = "5.0.6.RELEASE"
