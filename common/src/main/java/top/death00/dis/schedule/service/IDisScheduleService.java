@@ -11,6 +11,11 @@ import java.util.Date;
 public interface IDisScheduleService {
 
 	/**
+	 * 重新加载
+	 */
+	void reload();
+
+	/**
 	 * serverName是否有效
 	 */
 	boolean serverNameIsValid(String serverName);
@@ -19,4 +24,9 @@ public interface IDisScheduleService {
 	 * 尝试获取锁
 	 */
 	boolean tryGetLock(String taskName, Date taskDate, String serverName);
+
+	/**
+	 * 添加当前的serverName
+	 */
+	void addServerName(String serverName);
 }

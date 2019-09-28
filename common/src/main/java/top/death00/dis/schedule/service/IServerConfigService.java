@@ -1,5 +1,6 @@
 package top.death00.dis.schedule.service;
 
+import java.util.Date;
 import java.util.Map;
 import top.death00.dis.schedule.domain.ServerConfig;
 
@@ -23,4 +24,9 @@ public interface IServerConfigService {
 	 * 获取所有
 	 */
 	Map<String, ServerConfig> getAll();
+
+	/**
+	 * 添加
+	 */
+	void upsert(String serverName, boolean alive, Date curDate);
 }

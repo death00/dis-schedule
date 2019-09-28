@@ -1,6 +1,7 @@
 package top.death00.dis.schedule.service;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,11 @@ public class DisScheduleRedisServiceImpl implements IDisScheduleService {
 	public DisScheduleRedisServiceImpl(IRedisManager redisManager) {
 		Preconditions.checkNotNull(redisManager);
 		this.redisManager = redisManager;
+	}
+
+	@Override
+	public void reload() {
+		// do nothing
 	}
 
 	@Override
@@ -59,5 +65,11 @@ public class DisScheduleRedisServiceImpl implements IDisScheduleService {
 		}
 
 		return false;
+	}
+
+	@Override
+	public void addServerName(String serverName) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
+		redisManager.sadd(RedisKey.DIS_SCHEDULE_SERVER_NAME, serverName);
 	}
 }

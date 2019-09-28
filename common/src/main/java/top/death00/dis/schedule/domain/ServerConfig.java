@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -22,14 +23,23 @@ public class ServerConfig {
 	/**
 	 * 服务的名称
 	 */
+	@Indexed(unique = true, background = true)
 	private String name;
+
+	public static final String NAME = "name";
 
 	/**
 	 * 是否存活
 	 */
 	private boolean alive;
 
+	public static final String ALIVE = "alive";
+
 	private Date createTimestamp;
 
+	public static final String CREATE_TIMESTAMP = "createTimestamp";
+
 	private Date updateTimestamp;
+
+	public static final String UPDATE_TIMESTAMP = "updateTimestamp";
 }

@@ -4,9 +4,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import top.death00.dis.schedule.domain.ServerConfig;
 
 /**
@@ -63,5 +67,22 @@ public class ServerConfigServiceImpl implements IServerConfigService {
 	@Override
 	public Map<String, ServerConfig> getAll() {
 		return this.map;
+	}
+
+	@Override
+	public void upsert(String serverName, boolean alive, Date curDate) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
+		Preconditions.checkNotNull(curDate);
+
+		Query query = new Query(Criteria.where(ServerConfig.NAME).is(serverName));
+
+		Update update = new Update();
+		update.setOnInsert(ServerConfig.NAME, serverName);
+		update.setOnInsert(ServerConfig.CREATE_TIMESTAMP, curDate);
+
+		update.set(ServerConfig.ALIVE, alive);
+		update.set(ServerConfig.UPDATE_TIMESTAMP, curDate);
+
+		mongoTemplate.upsert(query, update, ServerConfig.class);
 	}
 }

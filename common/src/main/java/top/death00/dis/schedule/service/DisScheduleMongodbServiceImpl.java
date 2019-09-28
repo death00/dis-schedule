@@ -31,6 +31,11 @@ public class DisScheduleMongodbServiceImpl implements IDisScheduleService {
 
 
 	@Override
+	public void reload() {
+		serverConfigService.reload();
+	}
+
+	@Override
 	public boolean serverNameIsValid(String serverName) {
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
 
@@ -63,5 +68,11 @@ public class DisScheduleMongodbServiceImpl implements IDisScheduleService {
 
 		// 抢到锁了
 		return true;
+	}
+
+	@Override
+	public void addServerName(String serverName) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(serverName));
+		serverConfigService.upsert(serverName, true, TimeUtil.getCurDate());
 	}
 }
