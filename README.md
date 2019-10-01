@@ -3,6 +3,10 @@
 
 基于注解实现分布式定时调度，借用数据库或redis实现分布式锁，弥补了spring boot本身`@Scheduled`不支持分布式的缺点，且较为简单，容易上手。
 
+博客说明：
+
+[升级@Scheduled-分布式定时任务](https://death00.github.io/2019/09/30/%E5%8D%87%E7%BA%A7@Scheduled-%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/#more)
+
 ## 使用
 
 ### 配置阶段
