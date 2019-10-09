@@ -20,11 +20,13 @@ subprojects {
     ext {
         commonsLang3Version = "3.7"
         guavaVersion = "24.1-jre"
-        jedisVersion = "2.9.0"
         jodaTimeVersion = "2.10"
         springVersion = "5.0.6.RELEASE"
         springBootVersion = "2.0.4.RELEASE"
         springDataMongoDB = "2.0.9.RELEASE"
+
+        jedisVersion = "2.9.0"
+        redissonVersion = "3.11.4"
 
         log4jVersion = "1.2.17"
         slf4jVersion = "1.7.21"

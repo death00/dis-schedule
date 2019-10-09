@@ -2,6 +2,9 @@ package top.death00.dis.schedule.config;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -20,6 +23,8 @@ public class RedisConfig {
 	public RedisConfig(Environment env) {
 		this.env = env;
 	}
+
+	//region jedis
 
 	@Bean
 	public JedisPool jedisPool() {
@@ -60,4 +65,26 @@ public class RedisConfig {
 
 		return config;
 	}
+
+	//endregion
+
+	//region redisson
+
+	@Bean
+	public RedissonClient redissonClient() {
+		String host = env.getProperty("redis.host");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(host));
+		String port = env.getProperty("redis.port");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(port));
+		String password = env.getProperty("redis.password");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(password));
+
+		Config config = new Config();
+		config.useSingleServer()
+			.setAddress("redis://" + host + ":" + port).setPassword(password);
+
+		return Redisson.create(config);
+	}
+
+	//endregion
 }

@@ -7,14 +7,16 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 /**
+ * 基于jedis实现的redisManager
+ *
  * @author death00
  * @date 2019/9/26 17:29
  */
-public class RedisManagerImpl implements IRedisManager {
+public class JedisManagerImpl implements IRedisManager {
 
 	private final JedisPool jedisPool;
 
-	public RedisManagerImpl(JedisPool jedisPool) {
+	public JedisManagerImpl(JedisPool jedisPool) {
 		Preconditions.checkNotNull(jedisPool);
 		this.jedisPool = jedisPool;
 	}

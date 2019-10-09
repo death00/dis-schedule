@@ -9,4 +9,5 @@ dependencies {
     compile "org.apache.commons:commons-lang3:${commonsLang3Version}"
     compile "org.projectlombok:lombok:${lombokVersion}"
     compile "redis.clients:jedis:${jedisVersion}"
+    compile "org.redisson:redisson:${redissonVersion}"
 }
